@@ -44,6 +44,9 @@
         self.deviceHash = [NSNumber numberWithInteger:[idfv hash]];
         NSString *deviceHashUnsignedShort = [NSString stringWithFormat:@"%i",[self.deviceHash unsignedShortValue]];
         
+        NSLog(@"ID for Vendor: %@", idfv);
+        NSLog(@"ID Hash Unsigned Short: %@", deviceHashUnsignedShort);
+        
         //self.peerID = [[MCPeerID alloc] initWithDisplayName:[UIDevice currentDevice].name];
         self.peerID = [[MCPeerID alloc] initWithDisplayName:deviceHashUnsignedShort];
         self.session = [[MCSession alloc] initWithPeer:self.peerID];
@@ -218,7 +221,7 @@
         
         if([self.session.connectedPeers count]==0){
             self.isConnected = NO;
-            [self startAdvertisingAndStopBrowsing];
+            [self stopAdvertisingAndStartBrowsing];
         } else {
             self.isConnected = YES;
         }
